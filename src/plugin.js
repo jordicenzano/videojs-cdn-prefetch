@@ -72,8 +72,6 @@ const cdnPrefetch = function(options) {
             if (typeof (filesStr) === 'string') {
               const files = filesStr.split(',');
 
-              videojs.log('files: ' + JSON.stringify(files));
-
               for (let i = 0; i < files.length; i++) {
                 const urlBase = parseBaseUrl(chunkReqOptions.uri);
                 const prefetchUrl = urlBase + '/' + files[i];
