@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>videojs-cdn-prefetch Demo</title>
+  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
+  <link href="https://unpkg.com/@videojs/http-streaming@1.0.1/dist/videojs-http-streaming.min.js">
+</head>
+<body>
+  <!-- Just unsed to NOT show my CDN test distro to the world :-) -->
+  <script type="text/javascript" src="./secrets/vars.js"></script>
+
+  <video id="videojs-cdn-prefetch-player" class="video-js vjs-default-skin" controls></video>
+  <ul>
+    <li><a href="test/">Run unit tests in browser.</a></li>
+  </ul>
+
+  <script src="node_modules/video.js/dist/video.js"></script>
+  <script src="https://unpkg.com/@videojs/http-streaming@1.0.1/dist/videojs-http-streaming.min.js"></script>
+  <script src="dist/videojs-cdn-prefetch.js"></script>
+  <script>
+    (function(window, videojs) {
+      var player = window.player = videojs('videojs-cdn-prefetch-player');
+      player.cdnPrefetch();
+    }(window, window.videojs));
+  </script>
+
+  <script>
+    player.src({src: urlUnderTest, type: "application/x-mpegURL",});
+  </script>
+
+</body>
+</html>

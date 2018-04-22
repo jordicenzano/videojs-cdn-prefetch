@@ -1,0 +1,14 @@
+{
+  "generator-videojs-plugin": {
+    "scope": "",
+    "name": "cdn-prefetch",
+    "description": "Prefecth media segments to the CDN pop",
+    "author": "Jordi Cenzano <jordi.cenzano@gmail.com>",
+    "license": "mit",
+    "sass": false,
+    "ie8": false,
+    "docs": false,
+    "lang": false,
+    "husky": "lint"
+  }
+}
