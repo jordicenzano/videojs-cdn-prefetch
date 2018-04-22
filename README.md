@@ -10,7 +10,7 @@ This code detects the parameters `pr_url` inside the querystring of the HLS medi
 
 ```
 Chunk URL: 
-Test_00028.ts?pr_url=Test_00029.ts&pr_url=Test_00030.ts
+Test_00028.ts?pr_url=Test_00029.ts,Test_00030.ts&foo=bar
 ```
 
 In the previous example, before fetching the segment `Test_00028.ts` this plugin will send 2 GET requests (to: `Test_00029.ts`, and `Test_00030.ts`) with the following QS parameter `?pf=1`, in the CDN side we need to interpret this code and execute the prefecthing.

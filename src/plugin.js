@@ -61,19 +61,27 @@ const cdnPrefetch = function(options) {
         // Before each request check the QS
         const qs = parseQueryString(chunkReqOptions.uri);
 
-        for (let i = 0; i < qs.length; i++) {
-          const elem = qs[i];
-
+        for (const elem in qs) {
           // If QS contains pr_url param compose the URL based on the current
           // chunk and send the prefecth request
-          if (PREFETCH_QS_URL_PARAM in elem) {
+          if (PREFETCH_QS_URL_PARAM === elem) {
             // Compose prefetch URL
-            const file = elem[PREFETCH_QS_URL_PARAM];
-            const urlBase = parseBaseUrl(chunkReqOptions.uri);
-            const prefetchUrl = urlBase + '/' + file;
+            // Single var could contain several files
+            const filesStr = qs[PREFETCH_QS_URL_PARAM];
 
-            // Send prefetch request
-            getAjaxPrefetch(prefetchUrl);
+            if (typeof (filesStr) === 'string') {
+              const files = filesStr.split(',');
+
+              videojs.log('files: ' + JSON.stringify(files));
+
+              for (let i = 0; i < files.length; i++) {
+                const urlBase = parseBaseUrl(chunkReqOptions.uri);
+                const prefetchUrl = urlBase + '/' + files[i];
+
+                // Send prefetch request
+                getAjaxPrefetch(prefetchUrl);
+              }
+            }
           }
         }
 
@@ -91,7 +99,7 @@ const cdnPrefetch = function(options) {
   }
 
   function parseQueryString(url) {
-    const qs = [];
+    const qs = {};
     const posQs = url.indexOf('?');
 
     if (posQs < 0) {
@@ -105,7 +113,7 @@ const cdnPrefetch = function(options) {
     for (let i = 0; i < pairs.length; i++) {
       const pair = pairs[i].split('=');
 
-      qs.push({[decodeURIComponent(pair[0])]: decodeURIComponent(pair[1] || '')});
+      qs[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
     }
 
     return qs;
@@ -117,7 +125,7 @@ const cdnPrefetch = function(options) {
     xhr.open('GET', url + '?' + PREFETCH_QS_REQUEST_INDICATOR);
     xhr.onreadystatechange = function() {
       if (xhr.readyState > 3 && xhr.status === 200) {
-         videojs.log('Prefetch successful for: ' + url);
+        videojs.log('Prefetch successful for: ' + url);
       }
     };
 
