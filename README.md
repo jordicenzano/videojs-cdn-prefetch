@@ -1,3 +1,5 @@
+Note: This plugin is useless without the CDN prefetching code, that has to run on the CDN.
+
 # videojs-cdn-prefetch
 
 Prefecth media segments to the CDN point of presence (POP) used by the player, this improves the viewer experience (basically reduces the chances of buffering). This feature is specially interesting when your origin is very far from that viewer and the stream is not very popular on that CDN POP. 
